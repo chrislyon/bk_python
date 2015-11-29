@@ -10,6 +10,7 @@ script1 = """
 				C_DESC VARCHAR(30)
 			);
 			create table Ecriture( 
+				E_BOR NUMBER(8),
 				E_CPT VARCHAR(10),
 				E_SENS VARCHAR(1), 
 				E_DATE DATE, 
@@ -60,4 +61,6 @@ if __name__ == '__main__':
 	s,r = L.do_sql("insert into TEST (id, nom) values (4, 'TEST04')")
 	print("Status = %s Resultat %s " % (s,r))
 	s,r = L.do_sql("select rowid, * from TEST")
+	print("Status = %s Resultat %s " % (s,r))
+	s,r = L.do_sql("select * from sqlite_master")
 	print("Status = %s Resultat %s " % (s,r))
