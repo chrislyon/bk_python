@@ -28,15 +28,22 @@ class Livre(Base, BASE_TABLE):
 class Compte(Base, BASE_TABLE):
 	__tablename__ = 'COMPTES'
 	name = Column(String(30), nullable=False, unique=True)
+	livre_id = Column(Integer, ForeignKey('LIVRES.id'))
+	livre = relationship(Livre)
 
 class Releve(Base, BASE_TABLE):
 	__tablename__ = 'RELEVES'
 	name = Column(String(50), nullable=False)
+	livre_id = Column(Integer, ForeignKey('LIVRES.id'))
+	livre = relationship(Livre)
 
 
 class Ecriture(Base, BASE_TABLE):
 	__tablename__ = 'ECRITURES'
+	compte_id = Column(Integer, ForeignKey('COMPTES.id'))
 	compte = relationship(Compte)
+	releve_id = Column(Integer, ForeignKey('RELEVES.id'))
+	releve = relationship(Releve)
 	libelle = Column(String(30))
 	d_ecr = Column(Date)
 	montant = Column(Numeric(12,2))

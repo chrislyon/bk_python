@@ -3,6 +3,7 @@ from sqlalchemy.orm import sessionmaker
  
 from definitions import Base, BASE_NAME
 from definitions import Livre, Compte, Releve, Ecriture
+import datetime
  
 engine = create_engine(BASE_NAME)
 Base.metadata.bind = engine
@@ -25,9 +26,11 @@ session.commit()
 ## Creation de plusieurs comptes
 C1 = Compte()
 C1.name = "BNP:123456"
+C1.livre = L
 session.add(C1)
 C2 = Compte()
 C2.name = "POSTE:654321"
+C2.livre = L
 session.add(C2)
 
 session.commit()
@@ -43,6 +46,7 @@ E.libelle = "Ecriture no 1"
 E.d_ecr = datetime.datetime.now()
 E.montant = 1200
 E.releve = R
+session.add(E)
 
 session.commit()
 
@@ -52,5 +56,6 @@ E.libelle = "Ecriture no 2"
 E.d_ecr = datetime.datetime.now()
 E.montant = 110.12
 E.releve = R
+session.add(E)
 
 session.commit()
