@@ -21,6 +21,12 @@ class BASE_TABLE():
 	d_cre = Column(DateTime, default = datetime.datetime.now() )
 	d_mod = Column(DateTime, default = datetime.datetime.now(), onupdate=datetime.datetime.now() )
 
+class Compteur(Base, BASE_TABLE):
+	"Table des compteurs"
+	__tablename__ = "COMPTEURS"
+	nom = Column(String(20), nullable=False, unique=True)
+	val = Column(Integer)
+
 class Client(Base, BASE_TABLE):
 	"Le fichier client"
 	__tablename__ = 'CLIENTS'
@@ -50,7 +56,7 @@ class Stock(Base, BASE_TABLE):
 class ComCli(Base, BASE_TABLE):
 	"Les commandes clients"
 	__tablename__ = 'COMCLI'
-	numcom = Column(Integer, unique=True)
+	numcom = Column(Integer, primary_key=True)
 	datcom = Column(DateTime, default = datetime.datetime.now() )
 	client_id = Column(Integer, ForeignKey('CLIENTS.id'))
 	client = relationship(Client)
@@ -83,8 +89,7 @@ class LigFou(Base, BASE_TABLE):
 	prix = Column(BigInteger)
 	dprevu = Column(DateTime)
 	qrecu = Column(Integer)
-	
- 
+
 # Create an engine that stores data in the local directory's
 # sqlalchemy_example.db file.
 engine = create_engine(BASE_NAME)

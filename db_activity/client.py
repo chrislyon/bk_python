@@ -43,21 +43,23 @@ def get_client():
 def get_prods(cat):
 	max_cmd = len(cat)
 	nb_pro_cmd = random.randint(0, max_cmd-1)+1
-	print("Nb Produits a commandes : %s " % nb_pro_cmd )
 	pros = random.sample(cat, nb_pro_cmd)
-	print("Produits commandes : %s " % pros )
+	return pros
 
 def gnr_comcli(cli, prods):
-	pass
+	print("Client : %s " % cli )
+	print("Nb Produits a commandes : %s " % len(prods) )
+	print("Produits commandes : %s " % sorted(prods) )
+
 
 
 def run():
 	#Get catalog
 	catalog = get_catalog()
-	print(catalog)
+	#print(catalog)
 	#choix du client
 	client = get_client()
-	print(client)
+	#print(client)
 	# Choix du catalog
 	prods_cmd = get_prods(catalog)
 	#Gnr_cmdcli

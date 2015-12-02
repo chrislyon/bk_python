@@ -2,7 +2,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
  
 from definitions import Base, BASE_NAME
-from definitions import Client, Produit, Fourn, Stock
+from definitions import Client, Produit, Fourn, Stock, Compteur
 import datetime
 import random
  
@@ -11,6 +11,23 @@ Base.metadata.bind = engine
  
 DBSession = sessionmaker(bind=engine)
 session = DBSession()
+
+#Compteurs 
+r = Compteur()
+r.nom = "FACTURE"
+r.val = 1
+session.add(r)
+
+r = Compteur()
+r.nom = "COMCLI"
+r.val = 1
+session.add(r)
+
+r = Compteur()
+r.nom = "COMFOU"
+r.val = 1
+session.add(r)
+session.commit()
 
 #Client
 n = 10
