@@ -13,6 +13,8 @@ from sqlalchemy.orm import sessionmaker
 from definitions import Base, BASE_NAME
 from definitions import Client, Produit, Stock, ComCli, LigCli
 
+import sequence as seq
+
 import datetime
 import random
 
@@ -50,6 +52,27 @@ def gnr_comcli(cli, prods):
 	print("Client : %s " % cli )
 	print("Nb Produits a commandes : %s " % len(prods) )
 	print("Produits commandes : %s " % sorted(prods) )
+	print("Generation commande")
+	session = connect()
+	numcom = seq.Next_val('COMCLI')
+	C = ComCli()
+	C.numcom = numcom
+	C.datcom = datetime.datetime.now()
+	C.client = cli
+	C.facture = 0
+	session.add(C)
+	print( "Commande No : " , C.numcom )
+	n = 1
+	for p in prods:
+		L = LigCli()
+		L.numcom = numcom
+		L.numlig = n
+		L.produit = p
+		n += 1
+	session.commit()
+	session.close()
+
+
 
 
 
