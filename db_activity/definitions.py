@@ -56,7 +56,7 @@ class Stock(Base, BASE_TABLE):
 class ComCli(Base, BASE_TABLE):
 	"Les commandes clients"
 	__tablename__ = 'COMCLI'
-	numcom = Column(Integer, primary_key=True)
+	numcom = Column(Integer, unique=True)
 	datcom = Column(DateTime, default = datetime.datetime.now() )
 	client_id = Column(Integer, ForeignKey('CLIENTS.id'))
 	client = relationship(Client)

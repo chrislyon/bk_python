@@ -17,6 +17,7 @@ import sequence as seq
 
 import datetime
 import random
+import pdb
 
 ## Connexion
 def connect():
@@ -42,6 +43,14 @@ def get_client():
 	session.close()
 	return random.choice(l)
 
+def get_tarif(prod_id):
+	session = connect()
+	s = select([Produit]).where(Produit.id==prod_id)
+	r = session.execute(s)
+	p = r.fetchone()
+	session.close()
+	return p.prix
+
 def get_prods(cat):
 	max_cmd = len(cat)
 	nb_pro_cmd = random.randint(0, max_cmd-1)+1
@@ -58,7 +67,7 @@ def gnr_comcli(cli, prods):
 	C = ComCli()
 	C.numcom = numcom
 	C.datcom = datetime.datetime.now()
-	C.client = cli
+	C.client_id = cli
 	C.facture = 0
 	session.add(C)
 	print( "Commande No : " , C.numcom )
@@ -67,14 +76,14 @@ def gnr_comcli(cli, prods):
 		L = LigCli()
 		L.numcom = numcom
 		L.numlig = n
-		L.produit = p
+		L.produit_id = p
+		L.qte = random.randint(1, 5000)
+		L.prix = get_tarif(p)
+		print("%s : %s" % (n,L))
 		n += 1
+		session.add(L)
 	session.commit()
 	session.close()
-
-
-
-
 
 def run():
 	#Get catalog

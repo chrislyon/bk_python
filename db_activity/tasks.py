@@ -15,3 +15,4 @@ def test():
 	run('rm -f data.db')
 	run('python definitions.py')
 	run('python populate.py')
+
