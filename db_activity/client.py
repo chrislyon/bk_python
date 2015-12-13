@@ -77,7 +77,9 @@ def gnr_comcli(cli, prods):
 		L.numcom = numcom
 		L.numlig = n
 		L.produit_id = p
-		L.qte = random.randint(1, 5000)
+		L.qcom = random.randint(1, 5000)
+		L.qliv = 0
+		L.qfac = 0
 		L.prix = get_tarif(p)
 		print("%s : %s" % (n,L))
 		n += 1
