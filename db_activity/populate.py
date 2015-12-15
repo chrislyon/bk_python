@@ -51,6 +51,7 @@ n = 10
 for c in range(1,n):
 	r = Fourn()
 	r.nom = "FOU%02d" % c
+	r.delai = random.randint(5, 30)
 	print("Creation de %s " % r.nom)
 	session.add(r)
 	session.commit()

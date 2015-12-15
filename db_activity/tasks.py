@@ -1,4 +1,5 @@
 from invoke import task, run
+import random
 
 @task
 def hello():
@@ -12,7 +13,14 @@ def purge():
 
 @task
 def test():
+	print(" Creation de la base ")
 	run('rm -f data.db')
 	run('python definitions.py')
+	print(" Populons la base ")
 	run('python populate.py')
 
+@task(test)
+def client():
+	for x in range(1,random.randint(1,5)):
+		print(" Client %s " % x )
+		run('python client.py')
