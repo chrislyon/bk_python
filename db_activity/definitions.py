@@ -10,10 +10,15 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 from sqlalchemy import create_engine
 import datetime
+
+## Necessaire pour MySQL
+import pymysql_sa
+pymysql_sa.make_default_mysql_dialect()
  
 Base = declarative_base()
 
-BASE_NAME = 'sqlite:///data.db'
+#BASE_NAME = 'sqlite:///data.db'
+BASE_NAME = 'mysql://dev:dev@localhost/DEV'
 
 class BASE_TABLE():
 	" Classe commune a toute les autres"

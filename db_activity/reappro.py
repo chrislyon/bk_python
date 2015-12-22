@@ -38,10 +38,10 @@ def get_besoins():
 		where qcom-qliv > 0
 		order by produit_id
 	"""
-	## En vrai
+	## En vrai (note case sensitif avec MySQL)
 	r = """
 		select produit_id, sum(qcom) 'qte'
-		from ligcli
+		from LIGCLI
 		where qcom-qliv > 0
 		group by produit_id
 		order by produit_id
