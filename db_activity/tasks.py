@@ -1,3 +1,6 @@
+##
+## A Lancer avec invoke
+##
 from invoke import task, run
 import random
 
@@ -14,7 +17,7 @@ def purge():
 @task
 def test():
 	print(" Creation de la base ")
-	run('rm -f data.db')
+	run('./purge_DEV.sh')
 	run('python definitions.py')
 	print(" Populons la base ")
 	run('python populate.py')
